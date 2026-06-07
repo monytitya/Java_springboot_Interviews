@@ -3,6 +3,7 @@ package Springinterview.interviews.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,9 +11,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "teachers")
-public class Teacher {
+public class Teacher extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +28,7 @@ public class Teacher {
     private String email;
 
     @OneToMany(mappedBy = "teacher")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Student> students = new HashSet<>();
 
     public Long getId() {

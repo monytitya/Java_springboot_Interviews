@@ -28,6 +28,10 @@ public class TeacherService {
         return teacherRepository.save(t);
     }
 
+    public org.springframework.data.domain.Page<Teacher> findAll(org.springframework.data.domain.Pageable pageable) {
+        return teacherRepository.findAll(pageable);
+    }
+
     public List<Teacher> findAll() {
         return teacherRepository.findAll();
     }

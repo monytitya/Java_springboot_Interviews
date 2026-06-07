@@ -40,6 +40,11 @@ public class TeacherController {
         return teacherService.findAll();
     }
 
+    @GetMapping("/paged")
+    public org.springframework.data.domain.Page<Teacher> paged(org.springframework.data.domain.Pageable pageable) {
+        return teacherService.findAll(pageable);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Teacher> get(@PathVariable Long id) {
         try {

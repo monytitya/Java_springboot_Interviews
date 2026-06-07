@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,6 +72,19 @@ public class StudentController {
             d.setCourseIds(s.getCourses().stream().map(Course::getId).collect(Collectors.toSet()));
             return d;
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/paged")
+    public Page<StudentDto> paged(Pageable pageable) {
+        return studentService.findAll(pageable).map(s -> {
+            StudentDto d = new StudentDto();
+            d.setId(s.getId());
+            d.setName(s.getName());
+            d.setEmail(s.getEmail());
+            d.setTeacherId(s.getTeacher() != null ? s.getTeacher().getId() : null);
+            d.setCourseIds(s.getCourses().stream().map(Course::getId).collect(Collectors.toSet()));
+            return d;
+        });
     }
 
     @GetMapping("/{id}")
