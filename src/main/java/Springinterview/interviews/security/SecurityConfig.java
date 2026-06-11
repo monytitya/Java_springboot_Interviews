@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/ws/chat").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults());
 

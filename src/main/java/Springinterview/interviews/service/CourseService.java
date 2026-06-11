@@ -10,6 +10,7 @@ import Springinterview.interviews.repository.CourseRepository;
 
 @Service
 @Transactional
+
 public class CourseService {
 
     private final CourseRepository courseRepository;
