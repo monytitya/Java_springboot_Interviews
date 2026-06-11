@@ -45,6 +45,8 @@ public class TeacherController {
         return teacherService.findAll(pageable);
     }
 
+    
+
     @GetMapping("/{id}")
     public ResponseEntity<Teacher> get(@PathVariable Long id) {
         try {
